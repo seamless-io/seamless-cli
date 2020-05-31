@@ -1,4 +1,4 @@
-from subprocess import PIPE, check_output
+from subprocess import check_output
 
 import pytest
 
