@@ -11,4 +11,6 @@ Create virtual environment and run
 ```pip install -e .```
 
 ## Run tests locally
+```pip install -r test-requirements.txt```
+
 ```pytest```
