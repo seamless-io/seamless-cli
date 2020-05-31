@@ -1,4 +1,4 @@
-from subprocess import run
+from subprocess import run, PIPE, STDOUT
 
 import pytest
 
@@ -8,7 +8,7 @@ from core.constants import PACKAGE_NAME
 
 
 def execute_terminal_command(command):
-    result = run(command, capture_output=True)
+    result = run(command, stdout=PIPE, stderr=STDOUT)
     return result.stdout.decode("utf-8")
 
 
