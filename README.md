@@ -1,7 +1,7 @@
 # seamless-cli
 Command Line Interface for the Seamless Cloud
 
-![](https://github.com/seamless-io/seamless-cli/workflows/Python%20package/badge.svg)
+![](https://github.com/seamless-io/seamless-cli/workflows/Tests/badge.svg)
 
 ## Local development
 Create virtual environment and run
