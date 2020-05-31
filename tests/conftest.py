@@ -1,4 +1,4 @@
-from subprocess import check_output
+from subprocess import run
 
 import pytest
 
@@ -8,8 +8,8 @@ from core.constants import PACKAGE_NAME
 
 
 def execute_terminal_command(command):
-    result = check_output(command)
-    return result.decode("utf-8")
+    result = run(command, capture_output=True)
+    return result.stdout.decode("utf-8")
 
 
 @pytest.fixture(autouse=True, scope="session")
