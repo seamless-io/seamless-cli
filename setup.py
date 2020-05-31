@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from core.constants import PACKAGE_NAME
+from core.constants import PACKAGE_NAME, PACKAGE_ENTRY_POINT
 
 setup(
     name=PACKAGE_NAME,
@@ -10,6 +10,6 @@ setup(
     install_requires=["click~=7.1.2",],
     entry_points="""
         [console_scripts]
-        seamless=core.seamless:cli
-    """,
+        {entry_point}=core.seamless:cli
+    """.format(entry_point=PACKAGE_ENTRY_POINT),
 )
