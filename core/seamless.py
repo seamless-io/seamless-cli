@@ -1,6 +1,7 @@
 import click
 
 
+# This is just an entry point for the CLI, all other commands are registered in this group
 @click.group()
 def cli():
     pass
