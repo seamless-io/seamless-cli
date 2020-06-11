@@ -24,6 +24,7 @@ def run():
     tar = tarfile.open(ARCHIVE_FOR_SENDING_NAME, "w:gz")
     tar.add(folder_to_archive, filter=filtr)
     tar.close()
+    # TODO we should have this limit only on server side and return meaningful error
     if os.stat(ARCHIVE_FOR_SENDING_NAME).st_size > ARCHIVE_SIZE_LIMIT:
         print(f"Your project is too big."
               f" After we compressed the folder {folder_to_archive} the resulting file is more than 10 MB."
