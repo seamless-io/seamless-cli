@@ -37,8 +37,10 @@ def run():
 
     resp = requests.post(SEAMLESS_SERVICE_URL,
                          headers={'Authorization': '12345678'},
-                         files={'seamless_project': open(ARCHIVE_FOR_SENDING_NAME, 'rb')})
-    print(resp.text)
+                         files={'seamless_project': open(ARCHIVE_FOR_SENDING_NAME, 'rb')},
+                         stream=True)
+    for line in resp.iter_lines(decode_unicode=True, chunk_size=1):
+        print(line)
 
 
 @cli.command()
