@@ -1,4 +1,5 @@
 import os
+import sys
 import tarfile
 
 import click
@@ -32,9 +33,17 @@ def run():
               f"If you need to increase the limit - please shoot us an email at hello@seamlesscloud.io")
         exit(1)
     with open(ARCHIVE_FOR_SENDING_NAME, 'rb') as f:
-        r = requests.post(SEAMLESS_SERVICE_URL, data=f.read())
-    r.raise_for_status()
-    click.echo(r.text)
+        print('Start')
+        resp = requests.post(SEAMLESS_SERVICE_URL, data=f.read(), stream=True)
+        for line in (resp.raw.read_chunked()):
+            print(line)
+    #     for line in resp.iter_lines(chunk_size=None):
+    #         # click.echo(line)
+    #         print(line)
+    #         # sys.stdout.write(line)
+    #         sys.stdout.flush()
+    # import ipdb; ipdb.set_trace()
+    # print('ppp')
 
 
 @cli.command()
