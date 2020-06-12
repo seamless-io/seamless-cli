@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import tarfile
@@ -21,6 +22,7 @@ def run():
             if file.name.startswith(f"./{name}"):
                 return None
         return file
+
     folder_to_archive = '.'
     tar = tarfile.open(ARCHIVE_FOR_SENDING_NAME, "w:gz")
     tar.add(folder_to_archive, filter=filtr)
@@ -32,7 +34,10 @@ def run():
               f"In order to have a really seamless experience we recommend to remove non-essential files."
               f"If you need to increase the limit - please shoot us an email at hello@seamlesscloud.io")
         exit(1)
-    resp = requests.post(SEAMLESS_SERVICE_URL, files={'seamless_project': open(ARCHIVE_FOR_SENDING_NAME, 'rb')})
+
+    resp = requests.post(SEAMLESS_SERVICE_URL,
+                         headers={'Authorization': '12345678'},
+                         files={'seamless_project': open(ARCHIVE_FOR_SENDING_NAME, 'rb')})
     print(resp.text)
 
 

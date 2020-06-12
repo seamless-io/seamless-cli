@@ -1,4 +1,4 @@
 click~=7.1.2
 setuptools~=47.1.1
 requests~=2.23.0
-responses~=0.10.14
+responses~=0.10.15
