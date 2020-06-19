@@ -4,6 +4,7 @@ import tarfile
 import click
 import requests
 
+from core.api_key import get_api_key, CredentialsException, set_api_key, is_api_key_valid
 from core.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, EXCLUDE_FOLDERS_AND_FILES
 
 
@@ -67,5 +68,28 @@ def publish(schedule):
 
 
 @cli.command()
-def init():
+@click.option(
+    "--api-key",
+    "api_key",
+    help="api-key to associate the user on this machine with",
+)
+def init(api_key):
+    if api_key:
+        print(api_key)
+        if not is_api_key_valid(api_key):
+            click.echo("The API KEY provided is not valid. "
+                       "API key should be a sting exactly 32 characters long.")
+            exit(0)
+        click.echo("Setting the API KEY")
+        set_api_key(api_key)
+        key = set_api_key
+    else:
+        try:
+            key = get_api_key()
+        except CredentialsException:
+            click.echo("No valid credentials were found. "
+                       "Please run this command with --api-key flag and pass your api key.")
+            exit(0)
+
     click.echo("Initializing an example seamless project")
+    click.echo(key)
