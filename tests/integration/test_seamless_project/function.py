@@ -1,8 +1,8 @@
 from time import sleep
+import scipy
 
 if __name__ == '__main__':
+    print(f'SciPy version: {scipy.__version__}')
     print('Executing...')
-    for i in range(10):
-        print(i)
-        sleep(1)
+    sleep(1)
     print('Finished')
