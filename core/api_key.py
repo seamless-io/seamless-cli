@@ -1,23 +1,23 @@
 import os
 from pathlib import Path
 
+import click
+
 API_KEY_LENGTH = 32
 HOME = str(Path.home())
 CREDS_FOLDER = f"{HOME}/.seamless"
 CREDS_FILE = f"{CREDS_FOLDER}/credentials"
 
 
-class CredentialsException(Exception):
-    pass
-
-
 def get_api_key():
     if not os.path.exists(CREDS_FILE):
-        raise CredentialsException("Cannot find credentials")
+        click.echo("Cannot find credentials")
+        exit(0)
     with open(CREDS_FILE, 'r') as creds:
         api_key = creds.read()
     if not is_api_key_valid(api_key):
-        raise CredentialsException("Credentials file does not contain a valid API KEY")
+        click.echo("Credentials file does not contain a valid API KEY")
+        exit(0)
     return api_key
 
 
