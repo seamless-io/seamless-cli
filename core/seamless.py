@@ -59,24 +59,29 @@ def run():
 
 @cli.command()
 @click.option(
+    "--name",
+    help="name of the job you publish",
+    required=True
+)
+@click.option(
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-def publish(schedule):
+def publish(name, schedule):
     api_key = get_api_key()
     package_name = None
     try:
         package_name = _package_project(folder_to_archive='.')
+        params = {'name': name}
         if not schedule:
             click.echo("Publishing your code without schedule...")
-            params = {}
         else:
             click.echo(
                 "Publishing your code to run on schedule {schedule}...".format(
                     schedule=schedule
                 )
             )
-            params = {'schedule': schedule}
+            params.update({'schedule': schedule})
         resp = requests.post(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
                              params=params,
                              headers={'Authorization': api_key},
