@@ -103,7 +103,7 @@ def init(api_key):
         print(api_key)
         if not is_api_key_valid(api_key):
             click.echo("The API KEY provided is not valid. "
-                       "API key should be a sting exactly 32 characters long.")
+                       "API key should be a sting exactly 20 characters long.")
             exit(0)
         click.echo("Setting the API KEY")
         set_api_key(api_key)

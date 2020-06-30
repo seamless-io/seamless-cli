@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-API_KEY_LENGTH = 32
+API_KEY_LENGTH = 20
 HOME = str(Path.home())
 CREDS_FOLDER = f"{HOME}/.seamless"
 CREDS_FILE = f"{CREDS_FOLDER}/credentials"
