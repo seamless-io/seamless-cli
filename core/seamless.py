@@ -82,10 +82,10 @@ def publish(name, schedule):
                 )
             )
             params.update({'schedule': schedule})
-        resp = requests.post(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
-                             params=params,
-                             headers={'Authorization': api_key},
-                             files={'seamless_project': open(package_name, 'rb')})
+        resp = requests.put(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
+                            params=params,
+                            headers={'Authorization': api_key},
+                            files={'seamless_project': open(package_name, 'rb')})
         resp.raise_for_status()
         click.echo(resp.text)
         click.echo("Success!")
