@@ -4,7 +4,7 @@ from tests.integration.conftest import execute_terminal_command
 
 def test_init_command():
     output = execute_terminal_command([PACKAGE_ENTRY_POINT, "init"])
-    assert "Initializing an example seamless project" in output
+    assert "Cannot find credentials" in output
 
 
 def test_run_command_works():
