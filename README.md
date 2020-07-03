@@ -1,4 +1,4 @@
-# seamless-cli
+# SMLS
 Command Line Interface for the Seamless Cloud
 
 ![](https://github.com/seamless-io/seamless-cli/workflows/Tests/badge.svg)
