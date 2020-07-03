@@ -12,7 +12,10 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name=PACKAGE_NAME,
-    version="0.0.1",
+    version_config={
+        "version_format": "{tag}.dev{sha}",
+        "starting_version": "0.0.1"
+    },
     description="Command Line Interface to work with the Seamless Cloud product",
     long_description=README,
     long_description_content_type="text/markdown",
