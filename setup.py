@@ -33,7 +33,9 @@ setup(
     ],
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     include_package_data=True,
-    install_requires=["click~=7.1.2"],
+    install_requires=["click~=7.1.2",
+                      "requests~=2.23.0",
+                      "responses~=0.10.15"],
     entry_points="""
         [console_scripts]
         {entry_point}=core.seamless:cli
