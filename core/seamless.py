@@ -46,7 +46,11 @@ def run():
                              headers={'Authorization': api_key},
                              files={'seamless_project': open(package_name, 'rb')},
                              stream=True)
-        resp.raise_for_status()
+        try:
+            resp.raise_for_status()
+        except requests.HTTPError:
+            click.echo(resp.text)
+            exit(1)
         for line in resp.iter_lines(decode_unicode=True, chunk_size=1):
             click.echo(line)
     finally:
