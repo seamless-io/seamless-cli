@@ -83,7 +83,11 @@ def publish(name, schedule):
                             params=params,
                             headers={'Authorization': api_key},
                             files={'seamless_project': open(package_name, 'rb')})
-        resp.raise_for_status()
+        try:
+            resp.raise_for_status()
+        except requests.HTTPError:
+            click.echo(resp.text)
+            exit(1)
         data = resp.json()
         link_to_job = f"{SEAMLESS_HOST}/jobs/{data['job_id']}"
         if not data['existing_job']:
