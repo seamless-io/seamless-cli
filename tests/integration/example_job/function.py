@@ -11,8 +11,5 @@ if __name__ == "__main__":
     for ticker in tickers:
         print(f"Company: {ticker.info['longName']}")
         print(f"Stock Price: {ticker.info['regularMarketPrice']}")
-        if not ticker.recommendations.empty:
-            print("Latest 3 recommendations:")
-            print(ticker.recommendations.iloc[-3:])
-        else:
-            print("There are no recommendations available for this stock")
+        print("Latest 3 recommendations:")
+        print(ticker.recommendations.iloc[-3:])
