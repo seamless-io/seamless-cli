@@ -143,8 +143,7 @@ def init(api_key):
         exit(0)
     set_api_key(api_key)
 
-    click.echo("Welcome to the Seamless Cloud community! "
-               "(TODO for developers: we need to generate a sample project at this point)")
+    click.echo("Welcome to the Seamless Cloud community!")
 
 
 @cli.command()
