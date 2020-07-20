@@ -6,7 +6,8 @@ import requests
 
 from core.api_key import get_api_key, set_api_key, is_api_key_valid
 from core.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, \
-    EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_RUN_ROUTE, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST
+    EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_RUN_ROUTE, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST, \
+    SEAMLESS_SERVICE_JOBS_ROUTE
 
 
 def _package_project(folder_to_archive):
@@ -64,7 +65,7 @@ def run():
 @cli.command()
 @click.option(
     "--name",
-    help="name of the job you publish",
+    help="name of the job you want to publish",
     required=True
 )
 @click.option(
@@ -106,6 +107,25 @@ def publish(name, schedule):
                 os.remove(package_name)
         except OSError:
             pass
+
+
+@cli.command()
+@click.option(
+    "--name",
+    help="name of the job you want to remove",
+    required=True
+)
+def remove(name):
+    api_key = get_api_key()
+    resp = requests.delete(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_JOBS_ROUTE + f'/{name}',
+                           headers={'Authorization': api_key})
+    try:
+        resp.raise_for_status()
+    except requests.HTTPError:
+        click.echo(resp.text)
+        exit(1)
+
+    click.echo(f"Job '{name}' was removed.")
 
 
 @cli.command()
