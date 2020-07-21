@@ -80,10 +80,6 @@ def publish(name, schedule):
         package_name = _package_project(folder_to_archive='.')
         params = {'name': name}
         if schedule:
-            click.echo(
-                "By default if you publish your job schedule for the first time, it is disabled. "
-                "You can enable the schedule in the web app."
-            )
             params.update({'schedule': schedule})
         resp = requests.put(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
                             params=params,
