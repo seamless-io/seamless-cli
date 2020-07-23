@@ -65,11 +65,13 @@ def run():
 
 @cli.command()
 @click.option(
+    "-n",
     "--name",
     help="name of the job you want to publish",
     required=True
 )
 @click.option(
+    "-s",
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
