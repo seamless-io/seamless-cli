@@ -53,7 +53,7 @@ def run():
         except requests.HTTPError:
             click.echo(resp.text)
             exit(1)
-        for line in resp.iter_lines(decode_unicode=True, chunk_size=1):
+        for line in resp.iter_lines(decode_unicode=False, chunk_size=1):
             click.echo(line)
     finally:
         try:
