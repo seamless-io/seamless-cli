@@ -39,12 +39,15 @@ def cli():
 
 
 @cli.command()
-def run():
+@cli.option('-e', '--entrypoint', default='function.main' help='Dot-separated path to the function')
+@cli.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+def run(entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
     try:
         package_name = _package_project(folder_to_archive='.')
         resp = requests.post(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_RUN_ROUTE,
+                             params={'entrypoint': entrypoint, 'requirements': requirements},
                              headers={'Authorization': api_key},
                              files={'seamless_project': open(package_name, 'rb')},
                              stream=True)
@@ -75,12 +78,14 @@ def run():
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-def publish(name, schedule):
+@cli.option('-e', '--entrypoint', default='function.main' help='Dot-separated path to the function')
+@cli.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+def publish(name, schedule, entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
     try:
         package_name = _package_project(folder_to_archive='.')
-        params = {'name': name}
+        params = {'name': name, 'entrypoint': entrypoint, 'requirements': requirements}
         if schedule:
             params.update({'schedule': schedule})
         resp = requests.put(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
