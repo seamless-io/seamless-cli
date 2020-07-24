@@ -133,12 +133,7 @@ def remove(name):
 
 
 @cli.command()
-@click.option(
-    "--api-key",
-    "api_key",
-    help="api-key to associate the user on this machine with",
-    required=True
-)
+@click.argument('api_key', help="api-key to associate the user on this machine with")
 def init(api_key):
     if not is_api_key_valid(api_key):
         click.echo("The API KEY provided is not valid. "
