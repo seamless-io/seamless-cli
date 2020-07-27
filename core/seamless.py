@@ -39,8 +39,8 @@ def cli():
 
 
 @cli.command()
-@cli.option('-e', '--entrypoint', default='function.main' help='Dot-separated path to the function')
-@cli.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
+@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
 def run(entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
@@ -78,8 +78,8 @@ def run(entrypoint, requirements):
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-@cli.option('-e', '--entrypoint', default='function.main' help='Dot-separated path to the function')
-@cli.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
+@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
 def publish(name, schedule, entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
@@ -133,7 +133,7 @@ def remove(name):
 
 
 @cli.command()
-@click.argument('api_key', help="api-key to associate the user on this machine with")
+@click.argument('api_key')
 def init(api_key):
     if not is_api_key_valid(api_key):
         click.echo("The API KEY provided is not valid. "
