@@ -39,12 +39,15 @@ def cli():
 
 
 @cli.command()
-def run():
+@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
+@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+def run(entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
     try:
         package_name = _package_project(folder_to_archive='.')
         resp = requests.post(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_RUN_ROUTE,
+                             params={'entrypoint': entrypoint, 'requirements': requirements},
                              headers={'Authorization': api_key},
                              files={'seamless_project': open(package_name, 'rb')},
                              stream=True)
@@ -65,20 +68,24 @@ def run():
 
 @cli.command()
 @click.option(
+    "-n",
     "--name",
     help="name of the job you want to publish",
     required=True
 )
 @click.option(
+    "-s",
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-def publish(name, schedule):
+@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
+@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+def publish(name, schedule, entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
     try:
         package_name = _package_project(folder_to_archive='.')
-        params = {'name': name}
+        params = {'name': name, 'entrypoint': entrypoint, 'requirements': requirements}
         if schedule:
             params.update({'schedule': schedule})
         resp = requests.put(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_PUBLISH_ROUTE,
@@ -126,12 +133,7 @@ def remove(name):
 
 
 @cli.command()
-@click.option(
-    "--api-key",
-    "api_key",
-    help="api-key to associate the user on this machine with",
-    required=True
-)
+@click.argument('api_key')
 def init(api_key):
     if not is_api_key_valid(api_key):
         click.echo("The API KEY provided is not valid. "
