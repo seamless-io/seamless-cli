@@ -33,7 +33,8 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["click~=7.1.2",
+    install_requires=["setuptools-git",
+                      "click~=7.1.2",
                       "requests~=2.23.0",
                       "responses~=0.10.15"],
     entry_points="""
