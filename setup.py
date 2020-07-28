@@ -33,6 +33,10 @@ setup(
     ],
     packages=find_packages(),
     include_package_data=True,
+    package_data={
+        # If any package contains *.txt, include them:
+        '': ['*.txt'],
+    },
     install_requires=["setuptools-git",
                       "click~=7.1.2",
                       "requests~=2.23.0",
