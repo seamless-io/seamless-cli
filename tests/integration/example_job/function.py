@@ -13,6 +13,10 @@ tickers = [
 def main():
     for ticker in tickers:
         print(f"Company: {ticker.info['longName']}")
-        print(f"Stock Price: {ticker.info['regularMarketPrice']}")
+        print(f"Stock Price: ${ticker.info['regularMarketPrice']}")
+        # Let's look at 3 latest recommendations by stock analysts firms
         print("Latest 3 recommendations:")
-        print(ticker.recommendations.iloc[-3:])
+        for date, row in ticker.recommendations.iloc[-3:].iterrows():
+            print(f"{row['Firm']} recommendation dated {date.date()}: {row['To Grade']}")
+        # ................
+        # ^^ here you can send email or message in your favourite messenger if you want
