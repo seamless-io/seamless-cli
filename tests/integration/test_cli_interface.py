@@ -1,4 +1,4 @@
-from core.constants import PACKAGE_ENTRY_POINT
+from smls.constants import PACKAGE_ENTRY_POINT
 from tests.integration.conftest import execute_terminal_command
 
 

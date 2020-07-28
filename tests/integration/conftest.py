@@ -4,7 +4,7 @@ import pytest
 
 collect_ignore = ["setup.py"]
 
-from core.constants import PACKAGE_NAME
+from smls.constants import PACKAGE_NAME
 
 
 def execute_terminal_command(command):

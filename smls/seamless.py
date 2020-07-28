@@ -5,8 +5,8 @@ from distutils.dir_util import copy_tree
 import click
 import requests
 
-from core.api_key import get_api_key, set_api_key, is_api_key_valid
-from core.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, \
+from smls.api_key import get_api_key, set_api_key, is_api_key_valid
+from smls.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, \
     EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_RUN_ROUTE, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST, \
     SEAMLESS_SERVICE_JOBS_ROUTE
 
@@ -148,7 +148,7 @@ def auth(api_key):
 def example():
     example_job_folder_name = 'stock_monitoring_job'
     source = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                          '../tests/integration/example_job')
+                          '/example_job')
     destination = os.path.join(os.getcwd(), example_job_folder_name)
     copy_tree(source, destination)
 

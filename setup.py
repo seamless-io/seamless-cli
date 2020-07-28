@@ -2,7 +2,7 @@ import pathlib
 
 from setuptools import setup, find_packages
 
-from core.constants import PACKAGE_NAME, PACKAGE_ENTRY_POINT
+from smls.constants import PACKAGE_NAME, PACKAGE_ENTRY_POINT
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -38,6 +38,6 @@ setup(
                       "responses~=0.10.15"],
     entry_points="""
         [console_scripts]
-        {entry_point}=core.seamless:cli
+        {entry_point}=smls.seamless:cli
     """.format(entry_point=PACKAGE_ENTRY_POINT),
 )

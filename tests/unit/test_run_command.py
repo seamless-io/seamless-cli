@@ -1,8 +1,8 @@
 import responses
 from click.testing import CliRunner
 
-from core.constants import SEAMLESS_SERVICE_URL, SEAMLESS_SERVICE_RUN_ROUTE
-from core.seamless import run
+from smls.constants import SEAMLESS_SERVICE_URL, SEAMLESS_SERVICE_RUN_ROUTE
+from smls.seamless import run
 
 
 @responses.activate

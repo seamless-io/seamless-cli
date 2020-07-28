@@ -1,8 +1,8 @@
 import responses
 from click.testing import CliRunner
 
-from core.constants import SEAMLESS_SERVICE_URL, SEAMLESS_SERVICE_PUBLISH_ROUTE
-from core.seamless import publish
+from smls.constants import SEAMLESS_SERVICE_URL, SEAMLESS_SERVICE_PUBLISH_ROUTE
+from smls.seamless import publish
 
 
 @responses.activate
