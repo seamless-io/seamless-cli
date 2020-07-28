@@ -148,7 +148,7 @@ def auth(api_key):
 def example():
     example_job_folder_name = 'stock_monitoring_job'
     source = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                          '/example_job')
+                          'example_job')
     destination = os.path.join(os.getcwd(), example_job_folder_name)
     copy_tree(source, destination)
 
