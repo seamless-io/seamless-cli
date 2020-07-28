@@ -154,6 +154,6 @@ def example():
 
     click.echo(f"Example job was created! Now let's run and publish it. In the terminal do the following:")
     click.echo(f"'cd {example_job_folder_name}' - to go into the folder with the example job")
-    click.echo(f"'smls run' - to execute the job")
+    click.echo(f"'smls run' - to execute the job on the Seamless Cloud server")
     click.echo(f"'smls publish --name \"Stock Price Monitoring\" --schedule \"0 0 * * *\"' - "
                f"to run the job every day at 00:00 UTC")

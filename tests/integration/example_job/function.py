@@ -7,7 +7,10 @@ tickers = [
     # you can find a ticker from a company name here https://www.marketwatch.com/tools/quotes/lookup.asp
 ]
 
-if __name__ == "__main__":
+
+# By default Seamless Cloud will execute the function `main` in the file `function.py`
+# You can override this behaviour by using --entrypoint flag
+def main():
     for ticker in tickers:
         print(f"Company: {ticker.info['longName']}")
         print(f"Stock Price: {ticker.info['regularMarketPrice']}")
