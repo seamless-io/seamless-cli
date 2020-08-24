@@ -51,11 +51,7 @@ def run(entrypoint, requirements):
                              headers={'Authorization': api_key},
                              files={'seamless_project': open(package_name, 'rb')},
                              stream=True)
-        try:
-            resp.raise_for_status()
-        except requests.HTTPError:
-            click.echo(resp.text)
-            exit(1)
+        handle_server_response(resp)
         for line in resp.iter_lines(decode_unicode=False, chunk_size=1):
             click.echo(line)
     finally:
@@ -92,11 +88,7 @@ def publish(name, schedule, entrypoint, requirements):
                             params=params,
                             headers={'Authorization': api_key},
                             files={'seamless_project': open(package_name, 'rb')})
-        try:
-            resp.raise_for_status()
-        except requests.HTTPError:
-            click.echo(resp.text)
-            exit(1)
+        handle_server_response(resp)
         data = resp.json()
         link_to_job = f"{SEAMLESS_HOST}/jobs/{data['job_id']}"
         if not data['existing_job']:
@@ -123,12 +115,7 @@ def remove(name):
     api_key = get_api_key()
     resp = requests.delete(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_JOBS_ROUTE + f'/{name}',
                            headers={'Authorization': api_key})
-    try:
-        resp.raise_for_status()
-    except requests.HTTPError:
-        click.echo(resp.text)
-        exit(1)
-
+    handle_server_response(resp)
     click.echo(f"Job '{name}' was removed.")
 
 
@@ -158,3 +145,15 @@ def example():
                f" You need to be inside the folder with the job definition for this command to work.")
     click.echo(f"3. 'smls publish --name \"Stock Price Monitoring\" --schedule \"0 0 * * *\"' - "
                f"to run the job every day at 00:00 UTC")
+
+
+def handle_server_response(resp):
+    try:
+        resp.raise_for_status()
+    except requests.HTTPError:
+        if resp.status_code == 500:
+            click.echo("Oops, there was an error on the server side. We are already investigating."
+                       "If you want to be up to date on the fix status, please email us at hello@seamlesscloud.io.")
+        else:
+            click.echo(resp.text)
+        exit(1)
