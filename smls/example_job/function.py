@@ -10,7 +10,7 @@ tickers = [
 
 # By default Seamless Cloud will execute the function `main` in the file `function.py`
 # You can override this behaviour by using --entrypoint flag
-def main():
+if __name__ == '__main__':
     for ticker in tickers:
         print(f"Company: {ticker.info['longName']}")
         print(f"Stock Price: ${ticker.info['regularMarketPrice']}")

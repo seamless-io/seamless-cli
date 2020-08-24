@@ -8,7 +8,7 @@ import requests
 from smls.api_key import get_api_key, set_api_key, is_api_key_valid
 from smls.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, \
     EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_RUN_ROUTE, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST, \
-    SEAMLESS_SERVICE_JOBS_ROUTE
+    SEAMLESS_SERVICE_JOBS_ROUTE, DEFAULT_ENTRYPOINT_FILENAME, DEFAULT_REQUIREMENTS_FILE
 
 
 def _package_project(folder_to_archive):
@@ -39,8 +39,8 @@ def cli():
 
 
 @cli.command()
-@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
-@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+@click.option('-e', '--entrypoint', default=DEFAULT_ENTRYPOINT_FILENAME, help='Dot-separated path to the function')
+@click.option('-r', '--requirements', default=DEFAULT_REQUIREMENTS_FILE, help='Path to the file with requirements')
 def run(entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
@@ -74,8 +74,8 @@ def run(entrypoint, requirements):
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-@click.option('-e', '--entrypoint', default='function.py', help='Name of the entrypoint file')
-@click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
+@click.option('-e', '--entrypoint', default=DEFAULT_ENTRYPOINT_FILENAME, help='Name of the entrypoint file')
+@click.option('-r', '--requirements', default=DEFAULT_REQUIREMENTS_FILE, help='Path to the file with requirements')
 def publish(name, schedule, entrypoint, requirements):
     api_key = get_api_key()
     package_name = None
