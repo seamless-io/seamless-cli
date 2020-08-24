@@ -78,7 +78,7 @@ def run(entrypoint, requirements):
     "--schedule",
     help="cron expression that identifies the schedule your code runs on",
 )
-@click.option('-e', '--entrypoint', default='function.main', help='Dot-separated path to the function')
+@click.option('-e', '--entrypoint', default='function.py', help='Name of the entrypoint file')
 @click.option('-r', '--requirements', default='requirements.txt', help='Path to the file with requirements')
 def publish(name, schedule, entrypoint, requirements):
     api_key = get_api_key()
