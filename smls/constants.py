@@ -5,7 +5,6 @@ ARCHIVE_SIZE_LIMIT = 10 * 1024 * 1024  # 10 MB
 SEAMLESS_HOST = "https://app.seamlesscloud.io"
 # SEAMLESS_HOST = "http://localhost:5000"
 SEAMLESS_SERVICE_URL = f"{SEAMLESS_HOST}/api/v1"
-SEAMLESS_SERVICE_RUN_ROUTE = "/run"
 SEAMLESS_SERVICE_PUBLISH_ROUTE = "/publish"
 SEAMLESS_SERVICE_JOBS_ROUTE = "/jobs"
 EXCLUDE_FOLDERS_AND_FILES = ['.git', '__pycache__', '.pytest_cache']

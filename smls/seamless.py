@@ -7,7 +7,7 @@ import requests
 
 from smls.api_key import get_api_key, set_api_key, is_api_key_valid
 from smls.constants import ARCHIVE_FOR_SENDING_NAME, SEAMLESS_SERVICE_URL, ARCHIVE_SIZE_LIMIT, \
-    EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_RUN_ROUTE, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST, \
+    EXCLUDE_FOLDERS_AND_FILES, SEAMLESS_SERVICE_PUBLISH_ROUTE, SEAMLESS_HOST, \
     SEAMLESS_SERVICE_JOBS_ROUTE, DEFAULT_ENTRYPOINT_FILENAME, DEFAULT_REQUIREMENTS_FILE
 
 
@@ -36,30 +36,6 @@ def _package_project(folder_to_archive):
 # This is just an entry point for the CLI, all other commands are registered in this group
 def cli():
     pass
-
-
-@cli.command()
-@click.option('-e', '--entrypoint', default=DEFAULT_ENTRYPOINT_FILENAME, help='Dot-separated path to the function')
-@click.option('-r', '--requirements', default=DEFAULT_REQUIREMENTS_FILE, help='Path to the file with requirements')
-def run(entrypoint, requirements):
-    api_key = get_api_key()
-    package_name = None
-    try:
-        package_name = _package_project(folder_to_archive='.')
-        resp = requests.post(SEAMLESS_SERVICE_URL + SEAMLESS_SERVICE_RUN_ROUTE,
-                             params={'entrypoint': entrypoint, 'requirements': requirements},
-                             headers={'Authorization': api_key},
-                             files={'seamless_project': open(package_name, 'rb')},
-                             stream=True)
-        handle_server_response(resp)
-        for line in resp.iter_lines(decode_unicode=False, chunk_size=1):
-            click.echo(line)
-    finally:
-        try:
-            if package_name:
-                os.remove(package_name)
-        except OSError:
-            pass
 
 
 @cli.command()
