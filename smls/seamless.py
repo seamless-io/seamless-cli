@@ -115,12 +115,11 @@ def example():
     destination = os.path.join(os.getcwd(), example_job_folder_name)
     copy_tree(source, destination)
 
-    click.echo(f"Example job was created! Now let's run and publish it. In the terminal do the following:")
+    click.echo(f"Example job was created! Now let's publish it. In the terminal do the following:")
     click.echo(f"1. 'cd {example_job_folder_name}' - to go into the folder with the example job")
-    click.echo(f"2. 'smls run' - to execute the job on the Seamless Cloud server."
+    click.echo(f"2. 'smls publish --name \"Stock Price Monitoring\" --schedule \"0 0 * * *\"' - "
+               f"to run the job every day at 00:00 UTC."
                f" You need to be inside the folder with the job definition for this command to work.")
-    click.echo(f"3. 'smls publish --name \"Stock Price Monitoring\" --schedule \"0 0 * * *\"' - "
-               f"to run the job every day at 00:00 UTC")
 
 
 def handle_server_response(resp):
