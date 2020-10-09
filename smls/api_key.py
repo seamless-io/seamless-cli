@@ -13,14 +13,14 @@ def get_api_key():
     if not os.path.exists(CREDS_FILE):
         click.echo("Cannot find credentials. "
                    "Please go to app.seamlesscloud.io, copy your api-key and run "
-                   "'smls init <your api key>'")
+                   "'smls auth <your api key>'")
         exit(0)
     with open(CREDS_FILE, 'r') as creds:
         api_key = creds.read()
     if not is_api_key_valid(api_key):
         click.echo("Credentials file does not contain a valid API KEY "
                    "Please go to app.seamlesscloud.io, copy your api-key and run "
-                   "'smls init <your api key>'")
+                   "'smls auth <your api key>'")
         exit(0)
     return api_key
 
